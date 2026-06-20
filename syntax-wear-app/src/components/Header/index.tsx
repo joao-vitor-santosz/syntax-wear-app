@@ -10,7 +10,7 @@ export const Header = () => {
         <div className="bg-white max-w-330 mx-auto flex justify-between items-center py-3 px-7 rounded-2xl mt-5 ">
           <img src={Logo} alt="Logo SyntaxWear" className="w-32 md:w-36" />
           <nav className="hidden md:block">
-            <ul className="flex gap-10">
+            <ul className="flex gap-10 text-xl text-[#333333]">
               <li>
                 <a href="#">Masculino</a>
               </li>
@@ -24,7 +24,7 @@ export const Header = () => {
           </nav>
 
           <nav>
-            <ul className="flex gap-4 md:gap-10">
+            <ul className="flex gap-4 text-xl text-[#333333] md:gap-10">
               <li className="hidden md:block">
                 <a href="#">Nossas Lojas</a>
               </li>
