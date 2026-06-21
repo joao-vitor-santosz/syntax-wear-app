@@ -2,6 +2,7 @@ import Logo from "@/assets/images/Logo.png";
 import IconUser from "@/assets/images/icon-user.png";
 import IconAbout from "@/assets/images/icon-about.png";
 import IconCart from "@/assets/images/icon-cart.png";
+import { Link } from "@tanstack/react-router";
 
 export const Header = () => {
   return (
@@ -32,9 +33,9 @@ export const Header = () => {
                 <a href="#">Sobre</a>
               </li>
               <li>
-                <a href="#">
+                <Link to="/sign-in">
                   <img src={IconUser} alt="Ícone de login" />
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#">
