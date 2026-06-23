@@ -30,8 +30,8 @@ function RouteComponent() {
 
           <LoginForm />
 
-          <p className="mt-3.5">
-            Ainda não possui conta? <Link to="/sign-up" className="ml-1 text-[#5433eb] hover:underline">Cadastre-se</Link>
+          <p className="mt-3.5 text-center">
+            Ainda não possui conta?<Link to="/sign-up" className="ml-1 text-[#5433eb] hover:underline">Cadastre-se</Link>
           </p>
         </div>
       </div>
