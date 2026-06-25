@@ -1,0 +1,99 @@
+import { useState } from "react";
+import { useCEPForm } from "./cep-form.schema";
+import type { Adress } from "../../interfaces/adress";
+import formatCurrency from "../../utils/format-currency";
+
+const SHIPPING_BY_REGION: Record<string, number> = {
+  Norte: 19.9,
+  Nordeste: 29.9,
+  "Centro-Oeste": 14.9,
+  Sudeste: 24.9,
+  Sul: 39.9,
+};
+
+export const CEPForm = () => {
+  const { register, handleSubmit, errors, isSubmitting } = useCEPForm();
+  const [address, setAddress] = useState<Adress | null>(null);
+  const [addressError, setAddressError] = useState<string | null>(null);
+
+  const onSubmit = async ({ cep }: { cep: string }) => {
+    setAddressError(null);
+    setAddress(null);
+
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json`);
+      const data = await response.json();
+
+      if (data.erro) {
+        setAddressError("CEP não encontrado");
+        return;
+      }
+
+      const shippingCost = SHIPPING_BY_REGION[data.regiao];
+
+      if (!shippingCost) {
+        setAddressError("Região não suportada para entrega.");
+        return;
+      }
+
+      setAddress({ ...data, shippingCost: shippingCost });
+    } catch {
+      setAddressError(
+        "Ocorreu um erro ao buscar o CEP, tente novamente mais tarde."
+      );
+    }
+  };
+
+  return (
+    <>
+      <form
+        className="flex gap-3"
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
+        <div className="flex flex-col flex-1">
+          <input
+            type="text"
+            placeholder="Insira seu CEP"
+            className={
+              "border border-[#c0c0c0] rounded-md p-3" +
+              (errors.cep ? " border-red-600" : "")
+            }
+            {...register("cep")}
+          />
+          {errors.cep && (
+            <p className="text-red-600 text-sm mt-1">
+              {String(errors.cep.message)}
+            </p>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="bg-black text-white py-3 px-6 rounded-md cursor-pointer hover:bg-gray-800 disabled:opacity-50"
+        >
+          {isSubmitting ? "Calculando.." : "Calcular"}
+        </button>
+      </form>
+      
+      {addressError && (
+        <div className="mt-4">
+            <p className="text-red-600 text-sm">{addressError}</p>
+        </div>
+      )}
+
+      {address && (
+        <div className="mt-4">
+          <p>
+            <strong>Região:</strong> {address.regiao}
+          </p>
+          <p>
+            <strong>Custo de entrega:</strong>{" "}
+            {formatCurrency(address.shippingCost)}
+          </p>
+        </div>
+      )}
+    </>
+  );
+};
