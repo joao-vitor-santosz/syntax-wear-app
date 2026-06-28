@@ -56,7 +56,7 @@ export const CEPForm = () => {
             type="text"
             placeholder="Insira seu CEP"
             className={
-              "border border-border rounded-md p-3" +
+              "border border-border w-50 md:w-full rounded-md p-3" +
               (errors.cep ? " border-error" : "")
             }
             {...register("cep")}
