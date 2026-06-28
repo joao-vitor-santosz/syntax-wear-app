@@ -1,73 +1,96 @@
-# React + TypeScript + Vite
+# SyntaxWear App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**SyntaxWear App** é um projeto de front-end em React e TypeScript que implementa uma loja virtual de calçados com interface moderna e navegação por rotas. O aplicativo usa dados mockados para exibir produtos, categorias, páginas de produto, carrinho e telas de login/cadastro.
 
-Currently, two official plugins are available:
+## O que é o projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- SPA de e-commerce focada em produtos de calçados e vestuário.
+- Desenvolvido com React 19, Vite, TypeScript e Tailwind CSS.
+- Roteamento gerenciado por `@tanstack/react-router`.
+- Suporta listagem de produtos, filtro por categoria, página de detalhes de produto e carrinho de compras.
+- Inclui formulários de login e cadastro, além de cálculo de frete por CEP.
+- Utiliza dados mockados em `src/mocks` em vez de backend real.
 
-## React Compiler
+## Funcionalidades principais
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Página inicial com banner, categorias e galeria de produtos.
+- Navegação por rotas para produtos, categorias, produto único, loja e sobre.
+- Página de lista de produtos com cards de produto.
+- Página de detalhes de produto com cálculo de preço e botão para adicionar ao carrinho.
+- Drawer de carrinho com quantidade, incremento, decremento e remoção de itens.
+- Formulário de CEP para simulação de prazo de entrega.
+- Telas de login e cadastro com botões de integração visual para Google.
 
-## Expanding the ESLint configuration
+## Tecnologias usadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- @tanstack/react-router
+- react-hook-form
+- zod
+- react-icons
+- ESLint
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Estrutura do projeto
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- `src/App.tsx` - provedor de rotas e contexto do carrinho.
+- `src/main.tsx` - ponto de entrada da aplicação.
+- `src/router-tree-gen.ts` - árvore de rotas gerada pelo React Router.
+- `src/contexts` - contexto de carrinho (`CartContext`, `CartProvider`).
+- `src/components` - componentes reutilizáveis como `Header`, `Footer`, `ProductCard`, `CartDrawer`, `Hero`, `Categories`, `ProductList`, `LoginForm`, `RegisterForm`.
+- `src/pages` - rotas da aplicação, incluindo página raiz, autenticação e páginas de produtos.
+- `src/mocks` - dados de produtos e categorias para exibição.
+- `src/styles/globals.css` - estilos globais e configuração de Tailwind.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Como rodar
+
+1. Instale as dependências:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Inicie o servidor de desenvolvimento:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+3. Abra o projeto no navegador usando o endereço exibido no terminal, geralmente:
+
+```bash
+http://localhost:5173
+```
+
+## Build de produção
+
+Para gerar os arquivos de produção:
+
+```bash
+npm run build
+```
+
+Para visualizar o build gerado:
+
+```bash
+npm run preview
+```
+
+## Observações
+
+- O projeto usa dados mockados, então não há persistência real de carrinho ou autenticação.
+- O formulário de CEP é usado apenas para simular o fluxo de cálculo de entrega.
+- A navegação de categorias utiliza rotas dinâmicas de `@tanstack/react-router`.
+
+## Scripts disponíveis
+
+- `npm run dev` - inicia o servidor de desenvolvimento.
+- `npm run build` - compila a aplicação para produção.
+- `npm run preview` - pré-visualiza o build de produção.
+- `npm run lint` - executa o ESLint em todo o projeto.
+
+---
+
+Projeto criado como parte do curso DevQuest e destinado a demonstrar um front-end moderno de loja virtual em React.
