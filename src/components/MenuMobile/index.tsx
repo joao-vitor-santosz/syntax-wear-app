@@ -15,7 +15,7 @@ export const MenuMobile = ({ navLinks }: MenuMobileProps) => {
   return (
     <>
       <button
-        className="cursor-pointer"
+        className="cursor-pointer flex items-center justify-center"
         onClick={() => setMenuIsOpen(!menuIsOpen)}
       >
         <img src={IconMenu} alt="Ícone menu" />
